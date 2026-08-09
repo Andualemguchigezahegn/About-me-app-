@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andualem - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a2e;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        body.dark-mode {
+            background: #0d1117;
+            color: #e6edf3;
+        }
+
+        .app {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .app {
+            background: #161b22;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e1e4e8;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #0077b6;
+        }
+
+        body.dark-mode .header h1 {
+            color: #58a6ff;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        /* DARK MODE TOGGLE */
+        .dark-toggle {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: #0077b6;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .dark-toggle {
+            background: #238636;
+        }
+
+        .dark-toggle:hover {
+            opacity: 0.85;
+        }
+
+        /* NAVIGATION */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #1a1a2e;
+            background: #f0f2f5;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .nav-links button {
+            color: #e6edf3;
+            background: #21262d;
+        }
+
+        .nav-links button:hover {
+            background: #0077b6;
+            color: white;
+        }
+
+        body.dark-mode .nav-links button:hover {
+            background: #238636;
+        }
+
+        .nav-links button.active {
+            background: #0077b6;
+            color: white;
+        }
+
+        body.dark-mode .nav-links button.active {
+            background: #238636;
+        }
+
+        /* SOCIAL LINKS */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #f0f2f5;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #1a1a2e;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .social-link {
+            background: #21262d;
+            color: #e6edf3;
+        }
+
+        .social-link:hover {
+            background: #0077b6;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode .social-link:hover {
+            background: #238636;
+        }
+
+        /* SECTIONS */
+        .about,
+        .skills,
+        .projects,
+        .contact,
+        .blog {
+            padding: 25px 0;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .about:last-of-type,
+        .skills:last-of-type,
+        .projects:last-of-type,
+        .contact:last-of-type,
+        .blog:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #0077b6;
+        }
+
+        body.dark-mode h2 {
+            color: #58a6ff;
+        }
+
+        .about p {
+            font-size: 1.05rem;
+        }
+
+        /* SKILLS */
+        .skills ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .skills li {
+            background: #0077b6;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        body.dark-mode .skills li {
+            background: #238636;
+        }
+
+        /* PROJECTS */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .project-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e1e4e8;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .project-card {
+            background: #0d1117;
+            border-color: #30363d;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            color: #0077b6;
+            margin-bottom: 8px;
+        }
+
+        body.dark-mode .project-card h3 {
+            color: #58a6ff;
+        }
+
+        .project-card p {
+            margin-bottom: 10px;
+        }
+
+        .project-card a {
+            color: #0077b6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        body.dark-mode .project-card a {
+            color: #58a6ff;
+        }
+
+        .project-card a:hover {
+            text-decoration: underline;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .tech-tag {
+            background: #e1e4e8;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .tech-tag {
+            background: #21262d;
+            color: #58a6ff;
+        }
+
+        /* CONTACT */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 15px 0 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        body.dark-mode .contact-info {
+            background: #0d1117;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item a {
+            color: #0077b6;
+            text-decoration: none;
+        }
+
+        body.dark-mode .contact-item a {
+            color: #58a6ff;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 10px 14px;
+            border: 2px solid #e1e4e8;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #fafafa;
+            transition: border-color 0.3s ease;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background: #0d1117;
+            color: #e6edf3;
+            border-color: #30363d;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0077b6;
+        }
+
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group textarea:focus {
+            border-color: #58a6ff;
+        }
+
+        .submit-btn {
+            padding: 12px 24px;
+            background: #0077b6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .submit-btn:hover {
+            background: #005f8a;
+            transform: scale(1.05);
+        }
+
+        body.dark-mode .submit-btn {
+            background: #238636;
+        }
+
+        body.dark-mode .submit-btn:hover {
+            background: #2ea043;
+        }
+
+        /* BLOG */
+        .blog-subtitle {
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .blog-subtitle {
+            color: #8b949e;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .blog-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e1e4e8;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .blog-card {
+            background: #0d1117;
+            border-color: #30363d;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+
+        .blog-header h3 {
+            color: #0077b6;
+            font-size: 1.2rem;
+        }
+
+        body.dark-mode .blog-header h3 {
+            color: #58a6ff;
+        }
+
+        .blog-date {
+            font-size: 0.8rem;
+            color: #6b7280;
+            white-space: nowrap;
+        }
+
+        body.dark-mode .blog-date {
+            color: #8b949e;
+        }
+
+        .blog-excerpt {
+            margin-bottom: 10px;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .blog-tag {
+            background: #e1e4e8;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .blog-tag {
+            background: #21262d;
+            color: #58a6ff;
+        }
+
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e1e4e8;
+            padding-top: 12px;
+        }
+
+        body.dark-mode .blog-footer {
+            border-top-color: #30363d;
+        }
+
+        .blog-read-time {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        body.dark-mode .blog-read-time {
+            color: #8b949e;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: #0077b6;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        body.dark-mode .read-more-btn {
+            color: #58a6ff;
+        }
+
+        .read-more-btn:hover {
+            transform: translateX(4px);
+            color: #005f8a;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #6b7280;
+            border-top: 1px solid #e1e4e8;
+            margin-top: 10px;
+        }
+
+        body.dark-mode .footer {
+            color: #8b949e;
+            border-top-color: #30363d;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .app {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-top {
+                flex-direction: column;
+            }
+
+            .project-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links button {
+                padding: 6px 14px;
+                font-size: 0.9rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .submit-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* PAGE CONTAINER */
+        .page {
+            display: block;
+        }
+
+        .page.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root">
+        <div class="app">
+            <!-- HEADER -->
+            <header class="header">
+                <div class="header-top">
+                    <h1><span>👋</span> Hi, I'm Andualem</h1>
+                    <button class="dark-toggle" id="darkToggle">🌙 Dark Mode</button>
+                </div>
+                <p>Web Developer | React Enthusiast</p>
+
+                <nav class="nav-links" id="navLinks">
+                    <button class="active" data-page="home">Home</button>
+                    <button data-page="projects">Projects</button>
+                    <button data-page="blog">Blog</button>
+                    <button data-page="contact">Contact</button>
+                </nav>
+
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" target="_blank" class="social-link">
+                        <span>🐙</span> GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-link">
+                        <span>🔗</span> LinkedIn
+                    </a>
+                    <a href="https://twitter.com/yourusername" target="_blank" class="social-link">
+                        <span>🐦</span> Twitter
+                    </a>
+                </div>
+            </header>
+
+            <!-- HOME PAGE -->
+            <div id="page-home" class="page">
+                <section class="about">
+                    <h2>About Me</h2>
+                    <p>
+                        I'm a passionate developer who loves building interactive web applications.
+                        I enjoy learning new technologies and solving problems creatively.
+                    </p>
+                </section>
+
+                <section class="skills">
+                    <h2>My Skills</h2>
+                    <ul>
+                        <li>JavaScript</li>
+                        <li>React</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>Git</li>
+                        <li>Vite</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- PROJECTS PAGE -->
+            <div id="page-projects" class="page hidden">
+                <section class="projects">
+                    <h2>🚀 My Projects</h2>
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <h3>Weather App</h3>
+                            <p>Real-time weather forecast using OpenWeather API</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">API</span>
+                                <span class="tech-tag">CSS</span>
+                            </div>
+                            <a href="https://github.com/yourusername/weather-app" target="_blank">View Project →</a>
+                        </div>
+                        <div class="project-card">
+                            <h3>Todo List</h3>
+                            <p>Task manager with add, delete, and complete features</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Hooks</span>
+                                <span class="tech-tag">LocalStorage</span>
+                            </div>
+                            <a href="https://github.com/yourusername/todo-list" target="_blank">View Project →</a>
+                        </div>
+                        <div class="project-card">
+                            <h3>Portfolio Website</h3>
+                            <p>Personal portfolio built with React and Vite</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Vite</span>
+                                <span class="tech-tag">CSS</span>
+                            </div>
+                            <a href="https://github.com/yourusername/portfolio" target="_blank">View Project →</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- BLOG PAGE -->
+            <div id="page-blog" class="page hidden">
+                <section class="blog">
+                    <h2>✍️ My Blog</h2>
+                    <p class="blog-subtitle">Sharing my thoughts about web development</p>
+
+                    <div class="blog-grid">
+                        <article class="blog-card">
+                            <div class="blog-header">
+                                <h3>Getting Started with React</h3>
+                                <span class="blog-date">August 1, 2026</span>
+                            </div>
+                            <p class="blog-excerpt">React is a powerful library for building user interfaces. Learn the basics and start your journey...</p>
+                            <div class="blog-tags">
+                                <span class="blog-tag">React</span>
+                                <span class="blog-tag">JavaScript</span>
+                                <span class="blog-tag">Beginner</span>
+                            </div>
+                            <div class="blog-footer">
+                                <span class="blog-read-time">⏱️ 5 min read</span>
+                                <button class="read-more-btn">Read More →</button>
+                            </div>
+                        </article>
+
+                        <article class="blog-card">
+                            <div class="blog-header">
+                                <h3>Understanding React Hooks</h3>
+                                <span class="blog-date">July 25, 2026</span>
+                            </div>
+                            <p class="blog-excerpt">Hooks revolutionized React development. Let's explore useState, useEffect, and custom hooks...</p>
+                            <div class="blog-tags">
+                                <span class="blog-tag">React</span>
+                                <span class="blog-tag">Hooks</span>
+                                <span class="blog-tag">Advanced</span>
+                            </div>
+                            <div class="blog-footer">
+                                <span class="blog-read-time">⏱️ 8 min read</span>
+                                <button class="read-more-btn">Read More →</button>
+                            </div>
+                        </article>
+
+                        <article class="blog-card">
+                            <div class="blog-header">
+                                <h3>Building a Portfolio with Vite</h3>
+                                <span class="blog-date">July 20, 2026</span>
+                            </div>
+                            <p class="blog-excerpt">Vite is a lightning-fast build tool. Here's how I built my portfolio using React and Vite...</p>
+                            <div class="blog-tags">
+                                <span class="blog-tag">Vite</span>
+                                <span class="blog-tag">React</span>
+                                <span class="blog-tag">Portfolio</span>
+                            </div>
+                            <div class="blog-footer">
+                                <span class="blog-read-time">⏱️ 6 min read</span>
+                                <button class="read-more-btn">Read More →</button>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <!-- CONTACT PAGE -->
+            <div id="page-contact" class="page hidden">
+                <section class="contact">
+                    <h2>📬 Contact Me</h2>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <a href="mailto:andualemandualem25@gmail.com">andualemandualem25@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>📱</span>
+                            <a href="tel:+251983693486">0983693486</a>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Your name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="your@email.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" placeholder="Write your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message ✉️</button>
+                    </form>
+                </section>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <p>© 2026 Andualem. Built with React & Vite ❤️</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // ===== DARK MODE =====
+        const darkToggle = document.getElementById('darkToggle');
+        const body = document.body;
+
+        // Check saved preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            darkToggle.textContent = '☀️ Light Mode';
+        }
+
+        darkToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            darkToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+            localStorage.setItem('darkMode', isDark);
+        });
+
+        // ===== NAVIGATION =====
+        const navButtons = document.querySelectorAll('.nav-links button');
+        const pages = {
+            home: document.getElementById('page-home'),
+            projects: document.getElementById('page-projects'),
+            blog: document.getElementById('page-blog'),
+            contact: document.getElementById('page-contact')
+        };
+
+        function showPage(pageId) {
+            // Hide all pages
+            Object.values(pages).forEach(page => page.classList.add('hidden'));
+
+            // Show selected page
+            if (pages[pageId]) {
+                pages[pageId].classList.remove('hidden');
+            }
+
+            // Update active button
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.page === pageId) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const pageId = button.dataset.page;
+                showPage(pageId);
+            });
+        });
+
+        // ===== CONTACT FORM =====
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                alert('✅ Thanks for your message, ' + name + '! I\'ll get back to you soon.');
+                this.reset();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        // ===== READ MORE BUTTONS =====
+        document.querySelectorAll('.read-more-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const postTitle = this.closest('.blog-card').querySelector('h3').textContent;
+                alert('📖 Full article: "' + postTitle + '"\n\nThis would open the full blog post in a real app!');
+            });
+        });
+
+        // ===== SHOW HOME PAGE BY DEFAULT =====
+        showPage('home');
+
+        console.log('🚀 Andualem\'s Portfolio is running!');
+        console.log('📧 Email: andualemandualem25@gmail.com');
+        console.log('📱 Phone: 0983693486');
+    </script>
+
+</body>
+</html>
